@@ -45,8 +45,10 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDir = TrackingCamera.TransformDirection(inputDir);
             moveDir.y = 0;
             moveDir.Normalize();
+
             // Playerの向き
             transform.rotation = Quaternion.LookRotation(moveDir);
+            
             // 重力による自然落下
             Vector3 gravityVelocity = new Vector3(0, _rigidbody.linearVelocity.y, 0);
 
