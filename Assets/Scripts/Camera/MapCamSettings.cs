@@ -1,7 +1,7 @@
 using UnityEngine;
 
-/// <summary>ミニマップ用カメラ(Playerを真上から追跡)</summary>
-public class MapCamController : MonoBehaviour
+/// <summary>ミニマップ用カメラ</summary>
+public class MapCamSettings : MonoBehaviour
 {
     public Transform TargetPlayer;
     public Vector3 Offset = new Vector3(0, 50, 0);
