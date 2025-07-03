@@ -4,6 +4,7 @@ using UnityEngine.AI;
 /// <summary>Taggerの徘徊行動を制御</summary>
 public class WanderingField : MonoBehaviour
 {
+    public float WanderSpeed = 3.0f;
     public float WanderRadius = 100.0f;
     public float DestinationThreshold = 2.0f;
     private NavMeshAgent _agent;
@@ -15,6 +16,7 @@ public class WanderingField : MonoBehaviour
 
     void OnEnable()
     {
+        _agent.speed = WanderSpeed;
         SetNewDestination();
     }
 
