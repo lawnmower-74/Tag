@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c6a086dbd7743acaa42ca9bf740212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaseSpeed: 10
+  ChaseSpeed: 5
 --- !u!114 &105792240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,8 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a322c30901ad4de4aae49a521ede2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPlayer: {fileID: 660809221}
-  Offset: {x: 0, y: 50, z: 0}
+  CamPosition: {x: 0, y: 50, z: 0}
 --- !u!1 &568438225
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,7 +923,7 @@ Transform:
   m_GameObject: {fileID: 871821970}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 10, y: 0, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1192,7 +1191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c801db36ccd94103915a4b5caa0452c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 5
+  WalkSpeed: 3
+  RunSpeed: 6
   TrackingCamera: {fileID: 847343457}
   MouseSensitivity: 2
 --- !u!1 &1735795436
