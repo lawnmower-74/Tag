@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    public float MoveSpeed = 2.0f;
+    public float WalkSpeed = 3.0f;
+    public float RunSpeed = 6.0f;
     private Animator _animator;
     private Rigidbody _rigidbody;
 
@@ -39,6 +40,10 @@ public class PlayerController : MonoBehaviour
 
         bool isMoving = inputDir.magnitude > 0.01f;
 
+        // 移動スピードを選択
+        bool isRunning = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        float moveSpeed = isRunning ? RunSpeed : WalkSpeed;
+
         if (isMoving)
         {
             // 移動の向き・大きさ（水平方向のみ）
@@ -48,17 +53,19 @@ public class PlayerController : MonoBehaviour
 
             // Playerの向き
             transform.rotation = Quaternion.LookRotation(moveDir);
-            
+
             // 重力による自然落下
             Vector3 gravityVelocity = new Vector3(0, _rigidbody.linearVelocity.y, 0);
 
-            _rigidbody.linearVelocity = moveDir * MoveSpeed + gravityVelocity;
+            _rigidbody.linearVelocity = moveDir * moveSpeed + gravityVelocity;
         }
         else
         {
             _rigidbody.linearVelocity = new Vector3(0, _rigidbody.linearVelocity.y, 0);
         }
-        _animator.SetBool("isWalking", isMoving);
+
+        _animator.SetBool("isWalking", isMoving && !isRunning);
+        _animator.SetBool("isRunnig", isMoving && isRunning);
     }
 
     // 追尾カメラの視点操作

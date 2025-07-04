@@ -4,7 +4,7 @@ using UnityEngine.AI;
 /// <summary>Taggerの追跡行動を制御</summary>
 public class ChasingPlayer : MonoBehaviour
 {
-    public float ChaseSpeed = 10.0f;
+    public float ChaseSpeed = 5.0f;
     private NavMeshAgent _agent;
     private Transform _playerTransform;
 
