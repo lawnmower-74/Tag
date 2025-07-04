@@ -5,15 +5,17 @@ using UnityEngine;
 public class TaggerSpawner : MonoBehaviour
 {
     public GameObject Tagger;
-    public List<Transform> SpawnPoints; 
+    public float InitialSpawnDelay = 10.0f;
+    public float SpawnInterval = 30.0f;
+    public List<Transform> SpawnPoints;
     private List<Transform> _availableSpawnPoints;
 
     void Start()
     {
         _availableSpawnPoints = new List<Transform>(SpawnPoints);
 
-        // 30秒ごとにTaggerを出現
-        InvokeRepeating("SpawnTagger", 30f, 30f);
+        // Taggerの出現
+        InvokeRepeating("SpawnTagger", InitialSpawnDelay, SpawnInterval);
     }
 
     private void SpawnTagger()
