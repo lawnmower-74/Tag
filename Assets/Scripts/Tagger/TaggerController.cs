@@ -4,10 +4,13 @@ using UnityEngine;
 public class TaggerController : MonoBehaviour
 {
     public TaggerVision TaggerVisionScript;
+    public AudioClip FindSound;
     private WanderingField _wanderingFieldScript;
     private ChasingPlayer _chasingPlayerScript;
-    private Animator _animator;
     private Transform _targetTransform;
+    private Animator _animator;
+    private AudioSource _audioSource;
+    private bool _hasTarget = false;
 
     void Awake()
     {
@@ -15,11 +18,13 @@ public class TaggerController : MonoBehaviour
         _chasingPlayerScript = GetComponent<ChasingPlayer>(); // 追跡状態を管理
 
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
         SetStateWandering();
+        _hasTarget = false;
     }
 
     void Update()
@@ -29,10 +34,16 @@ public class TaggerController : MonoBehaviour
         if (_targetTransform != null)
         {
             _wanderingFieldScript.enabled = false; // ※徘徊の移動を無効化するため
+            
+            // 発見時のSE
+            if (!_hasTarget) _audioSource.PlayOneShot(FindSound);
+            _hasTarget = true;
+
             _animator.SetBool("isFinding", true);
         }
         else
         {
+            _hasTarget = false;
             _animator.SetBool("isFinding", false);
         }
     }
