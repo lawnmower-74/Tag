@@ -771,6 +771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac1fe801d60b4efdb3bec9f2a96c38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DestroyEffect: {fileID: 9157105887711914197, guid: 16914cdc0f4e24a0e9c23ba59163c2d8, type: 3}
+  DestroySE: {fileID: 8300000, guid: e4c500d9bf1054281847a2a9da4ac5cb, type: 3}
 --- !u!1 &2887633386142099983
 GameObject:
   m_ObjectHideFlags: 0
