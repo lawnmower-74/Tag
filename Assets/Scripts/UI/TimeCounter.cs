@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,11 @@ public class TimeCounter : MonoBehaviour
     public GameObject Player;
     public int CountDownMinutes = 3;
     private float CountDownSeconds;
-    private Text TimeText;
+    private TextMeshProUGUI TimeText;
 
     private void Start()
     {
-        TimeText = GetComponent<Text>();
+        TimeText = GetComponent<TextMeshProUGUI>();
         CountDownSeconds = CountDownMinutes * 60;
     }
 

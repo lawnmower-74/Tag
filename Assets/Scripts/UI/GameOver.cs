@@ -16,9 +16,9 @@ public class GameOver : MonoBehaviour
         }
     }
 
-    // public void GameReStart()
-    // {
-    //     // TODO：ゲーム画面ではなく、タイトル画面からにする予定
-    //     SceneManager.LoadScene("MainScene");
-    // }
+    public void GameReStart()
+    {
+        // TODO：クリックできないのでできるように
+        SceneManager.LoadScene("MainScene");
+    }
 }
