@@ -16,6 +16,7 @@ public class GameOver : MonoBehaviour
         }
     }
 
+    // リスタートボタンクリック時に実行（ゲームオーバー時に表示）
     public void GameReStart()
     {
         SceneManager.LoadScene("MainScene");

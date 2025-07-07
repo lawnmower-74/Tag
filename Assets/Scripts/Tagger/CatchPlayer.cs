@@ -5,6 +5,12 @@ public class CatchPlayer : MonoBehaviour
 {
     public GameObject DestroyEffect;
     public AudioClip DestroySE;
+    private AudioSource _audioSource;
+
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +21,7 @@ public class CatchPlayer : MonoBehaviour
             Instantiate(DestroyEffect, playerObject.transform.position, Quaternion.identity);
 
             // 消滅時SE
-            AudioSource.PlayClipAtPoint(DestroySE, playerObject.transform.position);
+            _audioSource.PlayOneShot(DestroySE);
 
             Destroy(other.gameObject);
         }
