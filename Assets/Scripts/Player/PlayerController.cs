@@ -31,6 +31,13 @@ public class PlayerController : MonoBehaviour
         TrackingCamera.transform.position = transform.position; // Playerを追尾
     }
 
+    // 鬼に捕まり消滅した際にはカーソルを通常の状態に戻す
+    void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     // Playerの移動操作
     private void Move()
     {

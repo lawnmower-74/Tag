@@ -18,7 +18,6 @@ public class GameOver : MonoBehaviour
 
     public void GameReStart()
     {
-        // TODO：クリックできないのでできるように
         SceneManager.LoadScene("MainScene");
     }
 }
