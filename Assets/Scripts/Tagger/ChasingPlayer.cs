@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class ChasingPlayer : MonoBehaviour
 {
     public float ChaseSpeed = 5.0f;
+
     private NavMeshAgent _agent;
     private Transform _playerTransform;
 
@@ -29,10 +30,6 @@ public class ChasingPlayer : MonoBehaviour
         if (_playerTransform != null)
         {
             _agent.SetDestination(_playerTransform.position);
-        }
-        else
-        {
-            _agent.ResetPath();
         }
     }
 }

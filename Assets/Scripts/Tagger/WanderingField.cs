@@ -40,7 +40,7 @@ public class WanderingField : MonoBehaviour
         Vector3 randomDir = Random.insideUnitSphere * WanderRadius;
         randomDir += transform.position;
 
-        // 目的地の座標がField外となる場合に備えて(randomDirをもとにhitを検索)
+        // randomDirから指定範囲内で最も近いNavMesh上の座標(hit)を検索
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomDir, out hit, WanderRadius, NavMesh.AllAreas))
         {
@@ -48,6 +48,7 @@ public class WanderingField : MonoBehaviour
         }
         else
         {
+            // 上記でNavMesh上の有効な座標が見つからなかったとき
             SetNewDestination();
         }
     }
