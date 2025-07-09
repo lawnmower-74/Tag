@@ -2241,8 +2241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c6a086dbd7743acaa42ca9bf740212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaseSpeed: 5
-  ChaseBGM: {fileID: 8300000, guid: 7597c0faf92f74cc2a4119c15a9b777a, type: 3}
+  ChaseSpeed: 6
 --- !u!54 &6732066017046448752
 Rigidbody:
   m_ObjectHideFlags: 0

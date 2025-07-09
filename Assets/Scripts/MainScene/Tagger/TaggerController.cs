@@ -12,6 +12,7 @@ public class TaggerController : MonoBehaviour
     private Animator _animator;
     private AudioSource _audioSource;
     private bool _playedFindSE = false;
+    private bool _isChasing = false;
 
     void Awake()
     {
@@ -26,6 +27,7 @@ public class TaggerController : MonoBehaviour
         // 初期状態は徘徊
         SetStateWandering();
         _playedFindSE = false;
+        _isChasing = false;
     }
 
     void Update()
@@ -44,12 +46,26 @@ public class TaggerController : MonoBehaviour
 
             // Findアニメーション終了後、自動でChaseアニメーションへ
             _animator.SetBool("isFinding", true);
+
+            // 追跡用BGMの再生
+            if (!_isChasing)
+            {
+                _isChasing = true;
+                BGMManager.Instance.OnTaggerStartChasing();
+            }
         }
         else
         {
             // 見失った場合は、Wanderアニメーションへ
             _playedFindSE = false;
             _animator.SetBool("isFinding", false);
+
+            // 追跡用BGMの停止
+            if (_isChasing)
+            {
+                _isChasing = false;
+                BGMManager.Instance.OnTaggerStopChasing();
+            }
         }
     }
 
