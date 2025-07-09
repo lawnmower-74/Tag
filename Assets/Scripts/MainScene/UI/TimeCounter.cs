@@ -1,13 +1,12 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>制限時間のカウント</summary>
 public class TimeCounter : MonoBehaviour
 {
     public GameObject Player;
-    public int CountDownMinutes = 3;
+    public int CountDownMinutes = 5;
     private float CountDownSeconds;
     private TextMeshProUGUI TimeText;
 
