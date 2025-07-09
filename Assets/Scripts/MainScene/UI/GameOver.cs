@@ -16,9 +16,15 @@ public class GameOver : MonoBehaviour
         }
     }
 
-    // リスタートボタンクリック時に実行（ゲームオーバー時に表示）
-    public void GameReStart()
+    // リスタートボタンクリック時に実行
+    public void ReStartGame()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    // TOPへボタンクリック時に実行
+    public void ToTop()
+    {
+        SceneManager.LoadScene("TopScene");
     }
 }
