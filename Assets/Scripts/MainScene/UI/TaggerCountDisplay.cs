@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class SpawnCountDisplay : MonoBehaviour
+public class TaggerCountDisplay : MonoBehaviour
 {
     public TaggerSpawner TaggerSpawner;
     private TextMeshProUGUI _spawnCountText;
