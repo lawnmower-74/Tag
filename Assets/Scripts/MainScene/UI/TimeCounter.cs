@@ -6,14 +6,19 @@ using UnityEngine;
 public class TimeCounter : MonoBehaviour
 {
     public GameObject Player;
-    public int CountDownMinutes = 5;
-    private float CountDownSeconds;
-    private TextMeshProUGUI TimeText;
+    
+    private TextMeshProUGUI _timeText;
+    private int _defaultPlayTimeMin = 3;
+    private float _playTimeSeconds;
+    private const string PLAY_TIME_KEY = "PlayTime";
 
     private void Start()
     {
-        TimeText = GetComponent<TextMeshProUGUI>();
-        CountDownSeconds = CountDownMinutes * 60;
+        _timeText = GetComponent<TextMeshProUGUI>();
+
+        // 設定したプレイ時間を取得
+        int playTimeMinutes = PlayerPrefs.GetInt(PLAY_TIME_KEY, _defaultPlayTimeMin);
+        _playTimeSeconds = playTimeMinutes * 60;
     }
 
     void Update()
@@ -21,11 +26,11 @@ public class TimeCounter : MonoBehaviour
         if (!Player) return;
 
         // カウントダウン
-        CountDownSeconds -= Time.deltaTime;
-        var span = new TimeSpan(0, 0, (int)CountDownSeconds);
-        TimeText.text = span.ToString(@"mm\:ss");
+        _playTimeSeconds -= Time.deltaTime;
+        var span = new TimeSpan(0, 0, (int)_playTimeSeconds);
+        _timeText.text = span.ToString(@"mm\:ss");
 
-        if (CountDownSeconds <= 0)
+        if (_playTimeSeconds <= 0)
         {
             // TODO：0秒になったときの処理
             return;
