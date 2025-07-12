@@ -5,33 +5,34 @@ using UnityEngine;
 public class TaggerSpawner : MonoBehaviour
 {
     public GameObject Tagger;
+    public int SpawnCounts = 12;
     public float InitialSpawnDelay = 10.0f;
-    public float SpawnInterval = 30.0f;
+    public float SpawnInterval = 20.0f;
     public List<Transform> SpawnPoints;
-    private List<Transform> _availableSpawnPoints;
+    public int SpawnedCounts => _spawnedCounts;
+    private int _spawnedCounts = 0;
 
     void Start()
     {
-        _availableSpawnPoints = new List<Transform>(SpawnPoints);
-
-        // Taggerの出現
+        // インターバル付きの鬼の出現
         InvokeRepeating("SpawnTagger", InitialSpawnDelay, SpawnInterval);
     }
 
     private void SpawnTagger()
     {
-        if (_availableSpawnPoints.Count == 0)
+        if (SpawnCounts < _spawnedCounts)
         {
             CancelInvoke("SpawnTagger");
             return;
         }
+        else
+        {
+            // スポーン位置はランダムに選択
+            int randomIndex = Random.Range(0, SpawnPoints.Count);
+            Transform randomSpawnPoint = SpawnPoints[randomIndex];
+            Instantiate(Tagger, randomSpawnPoint.position, randomSpawnPoint.rotation);
 
-        // スポーン位置は指定箇所からランダムに選択
-        int randomIndex = Random.Range(0, _availableSpawnPoints.Count);
-        Transform randomSpawnPoint = _availableSpawnPoints[randomIndex];
-        Instantiate(Tagger, randomSpawnPoint.position, randomSpawnPoint.rotation);
-
-        // 一度使われたスポーン位置は再利用不可とする
-        _availableSpawnPoints.RemoveAt(randomIndex);
+            _spawnedCounts++;
+        }
     }
 }

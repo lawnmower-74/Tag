@@ -1,20 +1,26 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-/// <summary>制限時間のカウント</summary>
+/// <summary>プレイ時間のカウントダウン・ゲームクリアの管理</summary>
 public class TimeCounter : MonoBehaviour
 {
     public GameObject Player;
-    public int CountDownMinutes = 3;
-    private float CountDownSeconds;
-    private TextMeshProUGUI TimeText;
+    public GameObject GameClearWindow;
+    public float PlayTimeSeconds => _playTimeSeconds;
+    
+    private TextMeshProUGUI _timeText;
+    private int _defaultPlayTimeMin = 3;
+    private float _playTimeSeconds;
+    private const string PLAY_TIME_KEY = "PlayTime";
 
-    private void Start()
+    void Start()
     {
-        TimeText = GetComponent<TextMeshProUGUI>();
-        CountDownSeconds = CountDownMinutes * 60;
+        _timeText = GetComponent<TextMeshProUGUI>();
+
+        // プレイ時間の単位換算
+        int playTimeMinutes = PlayerPrefs.GetInt(PLAY_TIME_KEY, _defaultPlayTimeMin);
+        _playTimeSeconds = playTimeMinutes * 60;
     }
 
     void Update()
@@ -22,14 +28,18 @@ public class TimeCounter : MonoBehaviour
         if (!Player) return;
 
         // カウントダウン
-        CountDownSeconds -= Time.deltaTime;
-        var span = new TimeSpan(0, 0, (int)CountDownSeconds);
-        TimeText.text = span.ToString(@"mm\:ss");
+        _playTimeSeconds -= Time.deltaTime;
+        var span = new TimeSpan(0, 0, (int)_playTimeSeconds);
+        _timeText.text = span.ToString(@"mm\:ss");
 
-        if (CountDownSeconds <= 0)
+        // 時間内、鬼から逃げ切れればゲームクリア
+        if (_playTimeSeconds <= 0)
         {
-            // TODO：0秒になったときの処理
-            return;
+            Destroy(Player);
+            BGMManager.Instance.OnTaggerStopChasing();
+            
+            GameClearWindow.SetActive(true);
+            enabled = false;
         }
     }
 }

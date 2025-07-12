@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-/// <summary>Taggerの追跡行動を制御</summary>
+/// <summary>鬼の追跡行動を制御</summary>
 public class ChasingPlayer : MonoBehaviour
 {
     public float ChaseSpeed = 6.0f;

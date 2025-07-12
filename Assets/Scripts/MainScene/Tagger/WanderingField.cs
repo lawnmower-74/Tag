@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-/// <summary>Taggerの徘徊行動を制御</summary>
+/// <summary>鬼の徘徊行動を制御</summary>
 public class WanderingField : MonoBehaviour
 {
     public float WanderSpeed = 3.0f;

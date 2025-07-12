@@ -1,30 +1,21 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-/// <summary>ゲームオーバー画面の表示・リスタート</summary>
+/// <summary>ゲームオーバー画面の表示</summary>
 public class GameOver : MonoBehaviour
 {
     public GameObject Player;
     public GameObject GameOverWindow;
-
+    public TimeCounter TimeCounter;
+    private float _playTimeSeconds;
 
     void Update()
     {
-        if (!Player)
+        _playTimeSeconds = TimeCounter.PlayTimeSeconds;
+
+        // 鬼に捕まったらアウト
+        if (!Player && _playTimeSeconds > 0)
         {
             GameOverWindow.SetActive(true);
         }
-    }
-
-    // リスタートボタンクリック時に実行
-    public void ReStartGame()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-
-    // TOPへボタンクリック時に実行
-    public void ToTop()
-    {
-        SceneManager.LoadScene("TopScene");
     }
 }
