@@ -561,7 +561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 587.25, y: -50}
+  m_AnchoredPosition: {x: 702.75, y: -50}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387985059
@@ -715,7 +715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3bdd2a58ec54f00816249737c42ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultPlayTimeMin: 3
 --- !u!1 &480291089
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,8 +832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f726eac3606e143888c89e8b6c6e4dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DescriptionPanel: {fileID: 1634608692}
-  SettingPanel: {fileID: 1415333823}
 --- !u!1 &502491972
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,7 +910,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1\u301C5\u3067\uFF08\u672A\u5165\u529B\u3060\u30683\uFF09"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 64519871bd68949c799a6a9413cfe557, type: 2}
   m_sharedMaterial: {fileID: 4222696784261682720, guid: 64519871bd68949c799a6a9413cfe557, type: 2}
@@ -1700,12 +1697,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 480291094}
-        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
-        m_MethodName: SetPlayTime
-        m_Mode: 1
+        m_TargetAssemblyTypeName: TopButtonHandler, Assembly-CSharp
+        m_MethodName: OpenPanel
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1415333823}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2071,7 +2068,7 @@ GameObject:
   - component: {fileID: 1394653940}
   - component: {fileID: 1394653939}
   m_Layer: 5
-  m_Name: DescriptionButton
+  m_Name: RulesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2143,11 +2140,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 480291094}
         m_TargetAssemblyTypeName: TopButtonHandler, Assembly-CSharp
-        m_MethodName: DisplayDescriptionPanel
-        m_Mode: 1
+        m_MethodName: OpenPanel
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1634608692}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2203,7 +2200,7 @@ GameObject:
   - component: {fileID: 1415333826}
   - component: {fileID: 1415333825}
   m_Layer: 5
-  m_Name: SettingPanel
+  m_Name: PlayTimePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2302,7 +2299,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 295.75, y: -50}
+  m_AnchoredPosition: {x: 334.25, y: -50}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1489389320
@@ -2681,7 +2678,7 @@ GameObject:
   - component: {fileID: 1634608695}
   - component: {fileID: 1634608694}
   m_Layer: 5
-  m_Name: DescriptionPanel
+  m_Name: RulesPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3021,7 +3018,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -117.5}
+  m_AnchoredPosition: {x: 518.5, y: -128.25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1821924017
@@ -3060,7 +3057,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 480, y: -472.5}
+  m_AnchoredPosition: {x: 518.5, y: -504.75}
   m_SizeDelta: {x: 220, y: 70}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1821924019
