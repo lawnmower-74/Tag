@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 126397023}
   - component: {fileID: 126397022}
   - component: {fileID: 126397021}
-  - component: {fileID: 126397026}
+  - component: {fileID: 126397028}
   - component: {fileID: 126397025}
   - component: {fileID: 126397027}
   m_Layer: 5
@@ -426,18 +426,6 @@ MonoBehaviour:
   Player: {fileID: 1280391192}
   GameOverWindow: {fileID: 210857460}
   TimeCounter: {fileID: 1555419594}
---- !u!114 &126397026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126397020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b6f1928d71a4e029f9a7ef1a56f9c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &126397027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,6 +441,18 @@ MonoBehaviour:
   Player: {fileID: 1280391192}
   GameClearWindow: {fileID: 2103283080}
   TimeCounter: {fileID: 1555419594}
+--- !u!114 &126397028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126397020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c179a0b0b37f64dc59c4642a6f0811a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &141812887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,9 +1083,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 126397026}
-        m_TargetAssemblyTypeName: MainButtonHandler, Assembly-CSharp
-        m_MethodName: ReStartGame
+      - m_Target: {fileID: 126397028}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1503,8 +1503,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 126397026}
-        m_TargetAssemblyTypeName: MainButtonHandler, Assembly-CSharp
+      - m_Target: {fileID: 126397028}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
         m_MethodName: ToTop
         m_Mode: 1
         m_Arguments:
@@ -2500,8 +2500,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 126397026}
-        m_TargetAssemblyTypeName: MainButtonHandler, Assembly-CSharp
+      - m_Target: {fileID: 126397028}
+        m_TargetAssemblyTypeName: ButtonHandler, Assembly-CSharp
         m_MethodName: ToTop
         m_Mode: 1
         m_Arguments:

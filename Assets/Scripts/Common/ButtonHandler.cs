@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/// <summary>TopSceneに属するボタンの挙動を制御</summary>
-public class TopButtonHandler : MonoBehaviour
+/// <summary>ボタン操作を制御</summary>
+public class ButtonHandler : MonoBehaviour
 {
     public void OpenPanel(GameObject panel)
     {
@@ -17,5 +17,10 @@ public class TopButtonHandler : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void ToTop()
+    {
+        SceneManager.LoadScene("TopScene");
     }
 }
