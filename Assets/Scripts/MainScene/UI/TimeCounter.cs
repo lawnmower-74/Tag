@@ -2,11 +2,10 @@ using System;
 using TMPro;
 using UnityEngine;
 
-/// <summary>プレイ時間のカウントダウン・ゲームクリア状態を管理</summary>
+/// <summary>プレイ時間のカウントダウン</summary>
 public class TimeCounter : MonoBehaviour
 {
     public GameObject Player;
-    public GameObject GameClearWindow;
     public float PlayTimeSeconds => _playTimeSeconds;
 
     private TextMeshProUGUI _timeText;
@@ -27,23 +26,11 @@ public class TimeCounter : MonoBehaviour
     void Update()
     {
         // ゲームオーバー／クリア時にはカウントを止める
-        if (!Player) return;
+        if (!Player || _playTimeSeconds <= 0) return;
 
         // カウントダウン
         _playTimeSeconds -= Time.deltaTime;
         var span = new TimeSpan(0, 0, (int)_playTimeSeconds);
         _timeText.text = span.ToString(@"mm\:ss");
-
-        // 時間内逃げ切れれば、ゲームクリア
-        if (_playTimeSeconds <= 0) GameClear();
-    }
-
-    private void GameClear()
-    {
-        Destroy(Player);
-        BGMManager.Instance.OnTaggerStopChasing();
-
-        GameClearWindow.SetActive(true);
-        enabled = false;
     }
 }

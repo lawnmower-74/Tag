@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 126397021}
   - component: {fileID: 126397026}
   - component: {fileID: 126397025}
+  - component: {fileID: 126397027}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -437,6 +438,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b6f1928d71a4e029f9a7ef1a56f9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &126397027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126397020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf03982d72f5447ab1f9af85bb691b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1280391192}
+  GameClearWindow: {fileID: 2103283080}
+  TimeCounter: {fileID: 1555419594}
 --- !u!1 &141812887
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,7 +3092,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1280391192}
-  GameClearWindow: {fileID: 2103283080}
 --- !u!222 &1555419595
 CanvasRenderer:
   m_ObjectHideFlags: 0
