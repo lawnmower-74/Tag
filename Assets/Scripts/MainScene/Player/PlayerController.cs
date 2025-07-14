@@ -4,8 +4,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
+    public StaminaSystem StaminaSystem;
     public float WalkSpeed = 3.0f;
     public float RunSpeed = 6.0f;
+    public bool IsRunning { get; private set; }
+
     private Animator _animator;
     private Rigidbody _rigidbody;
 
@@ -31,25 +34,32 @@ public class PlayerController : MonoBehaviour
         TrackingCamera.transform.position = transform.position; // Playerを追尾
     }
 
-    // 鬼に捕まり消滅した際にはカーソルを通常の状態に戻す
+    // ゲームオーバー／クリア時
     void OnDestroy()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        // スタミナゲージを非表示
+        StaminaSystem.gameObject.SetActive(false);
     }
 
     // Playerの移動操作
     private void Move()
     {
+        // 入力の取得
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDir = new Vector3(horizontalInput, 0, verticalInput);
+        bool runningInput = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
+        Vector3 inputDir = new Vector3(horizontalInput, 0, verticalInput);
         bool isMoving = inputDir.magnitude > 0.01f;
 
-        // 移動スピードを選択
-        bool isRunning = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        float moveSpeed = isRunning ? RunSpeed : WalkSpeed;
+        // スタミナを参照し走行可能かチェック
+        IsRunning = isMoving && runningInput && StaminaSystem.CanRun();
+
+        // 移動速度の決定
+        float moveSpeed = IsRunning ? RunSpeed : WalkSpeed;
 
         if (isMoving)
         {
@@ -71,8 +81,8 @@ public class PlayerController : MonoBehaviour
             _rigidbody.linearVelocity = new Vector3(0, _rigidbody.linearVelocity.y, 0);
         }
 
-        _animator.SetBool("isWalking", isMoving && !isRunning);
-        _animator.SetBool("isRunnig", isMoving && isRunning);
+        _animator.SetBool("isWalking", isMoving && !IsRunning);
+        _animator.SetBool("isRunnig", isMoving && IsRunning);
     }
 
     // 追尾カメラの視点操作
