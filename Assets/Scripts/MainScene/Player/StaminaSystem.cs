@@ -4,85 +4,141 @@ using UnityEngine.UI;
 /// <summary>Playerのスタミナを管理</summary>
 public class StaminaSystem : MonoBehaviour
 {
-    public GameObject Player;
+    public PlayerController PlayerController;
     public Image NormalStaminaGauge; // 通常のスタミナゲージ
-    public Image DepletedStaminaGauge; // 疲労状態のスタミナゲージ
-    public float MaxStamina = 100f;
-    public float RunCostPerSecond = 20f;
-    public float RecoverRatePerSecond = 15f;
+    public Image TiredStaminaGauge; // 疲労状態のスタミナゲージ
+    public Image BuffedStaminaGauge; // ポーション効果中のスタミナゲージ
 
-    private PlayerController _playerController;
+    // スタミナの量・消費・回復速度
+    private float _maxStamina = 100f;
     private float _currentStamina;
+    private float _runCostPerSecond = 20f;
+    private float _recoverRatePerSecond = 15f;
+
+    // ポーションの持続時間
+    private float _effectiveTime = 60f;
+    private float _remainingTime = 0f;
+
+    // スタミナの状態判定
     private bool _isTired = false;
+    private bool _isBuffed = false;
 
     void Awake()
     {
-        _currentStamina = MaxStamina;
+        _currentStamina = _maxStamina;
     }
 
     void Start()
     {
-        _playerController = Player.GetComponent<PlayerController>();
-
-        NormalStaminaGauge.gameObject.SetActive(true);
-        DepletedStaminaGauge.gameObject.SetActive(false);
-
+        // 初期状態は通常のスタミナゲージを表示
         UpdateStaminaUI();
     }
 
     void Update()
     {
-        if (_playerController == null) return;
+        // ポーションの持続時間のカウントダウン
+        if (_isBuffed)
+        {
+            _remainingTime -= Time.deltaTime;
+            if (_remainingTime <= 0f)
+            {
+                DisableStaminaBuff();
+            }
+        }
 
-        bool isRunning = _playerController.IsRunning;
+        bool isRunning = PlayerController.IsRunning;
 
-        if (isRunning && !_isTired)
+        if (isRunning && !_isTired && !_isBuffed)
         {
             // スタミナを消費
-            _currentStamina -= RunCostPerSecond * Time.deltaTime;
+            _currentStamina -= _runCostPerSecond * Time.deltaTime;
             _currentStamina = Mathf.Max(_currentStamina, 0);
 
             // スタミナが0になったら疲労状態(走行不能)にする
-            if (_currentStamina == 0)
-            {
-                _isTired = true;
-                NormalStaminaGauge.gameObject.SetActive(false);
-                DepletedStaminaGauge.gameObject.SetActive(true);
-            }
+            if (_currentStamina == 0) _isTired = true;
         }
         else
         {
             // スタミナを回復
-            _currentStamina += RecoverRatePerSecond * Time.deltaTime;
-            _currentStamina = Mathf.Min(_currentStamina, MaxStamina);
+            _currentStamina += _recoverRatePerSecond * Time.deltaTime;
+            _currentStamina = Mathf.Min(_currentStamina, _maxStamina);
 
             // スタミナが最大値に戻ったら疲労状態を解除
-            if (_currentStamina == MaxStamina)
-            {
-                _isTired = false;
-                NormalStaminaGauge.gameObject.SetActive(true);
-                DepletedStaminaGauge.gameObject.SetActive(false);
-            }
+            if (_currentStamina == _maxStamina) _isTired = false;
         }
 
+        // 消費／回復 を反映
         UpdateStaminaUI();
     }
 
+    /// <summary>
+    /// 走行可能か判定を行う
+    /// </summary>
+    /// <returns></returns>
+    public bool CanRun()
+    {
+        return _isBuffed || (!_isTired && _currentStamina > 0);
+    }
+
+    /// <summary>
+    /// スタミナ減少を無効化する
+    /// </summary>
+    public void EnableStaminaBuff()
+    {
+        // ポーション効果中の状態にする
+        _isBuffed = true;
+        _remainingTime = _effectiveTime; // タイマーのセット
+
+        // 疲労解除・スタミナ全回復
+        _isTired = false;
+        _currentStamina = _maxStamina;
+
+        // バフ状態のゲージを表示
+        UpdateStaminaUI();
+    }
+
+    // ポーションの効果切れ
+    private void DisableStaminaBuff()
+    {
+        _isBuffed = false;
+        _remainingTime = 0f;
+        
+        // 通常状態のゲージを表示
+        UpdateStaminaUI();
+    }
+
+    // 状態に合わせて表示するスタミナ量・ゲージを選択
     private void UpdateStaminaUI()
     {
-        if (NormalStaminaGauge.gameObject.activeSelf)
+        float fillAmount = _currentStamina / _maxStamina;
+
+        if (_isBuffed)
         {
-            NormalStaminaGauge.fillAmount = _currentStamina / MaxStamina;
+            SetStaminaGaugeState(false, false, true);
+            BuffedStaminaGauge.fillAmount = fillAmount;
         }
-        else if (DepletedStaminaGauge.gameObject.activeSelf)
+        else if (_isTired)
         {
-            DepletedStaminaGauge.fillAmount = _currentStamina / MaxStamina;
+            SetStaminaGaugeState(false, true, false);
+            TiredStaminaGauge.fillAmount = fillAmount;
+        }
+        else // 通常状態
+        {
+            SetStaminaGaugeState(true, false, false);
+            NormalStaminaGauge.fillAmount = fillAmount;
         }
     }
 
-    /// <summary>走行可能か判定を行う</summary>
-    public bool CanRun()
+    /// <summary>
+    /// 表示するスタミナゲージの選択
+    /// </summary>
+    /// <param name="isNormal">通常状態ゲージを表示</param>
+    /// <param name="isTired">疲労状態ゲージを表示</param>
+    /// <param name="isBuffed">バフ状態ゲージを表示</param>
+    private void SetStaminaGaugeState(bool isNormal, bool isTired, bool isBuffed)
     {
-        return !_isTired && _currentStamina > 0;
+        NormalStaminaGauge.gameObject.SetActive(isNormal);
+        TiredStaminaGauge.gameObject.SetActive(isTired);
+        BuffedStaminaGauge.gameObject.SetActive(isBuffed);
     }
 }

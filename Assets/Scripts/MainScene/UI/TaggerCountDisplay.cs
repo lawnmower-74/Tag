@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TaggerCountDisplay : MonoBehaviour
 {
-    public TaggerSpawner TaggerSpawner;
+    public ObjectSpawner ObjectSpawner;
     private TextMeshProUGUI _spawnCountText;
 
     void Start()
@@ -13,6 +13,6 @@ public class TaggerCountDisplay : MonoBehaviour
 
   void Update()
     {
-        _spawnCountText.text = TaggerSpawner.SpawnedCounts + "/" + TaggerSpawner.SpawnCounts;
+        _spawnCountText.text = ObjectSpawner.SpawnedCounts + "/" + ObjectSpawner.SpawnLimit;
     }
 }
