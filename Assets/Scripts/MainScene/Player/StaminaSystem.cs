@@ -36,38 +36,40 @@ public class StaminaSystem : MonoBehaviour
 
     void Update()
     {
-        // ポーションの持続時間のカウントダウン
+        // ポーション取得時
         if (_isBuffed)
         {
+            // 効果時間のカウントダウン
             _remainingTime -= Time.deltaTime;
             if (_remainingTime <= 0f)
             {
                 DisableStaminaBuff();
             }
         }
-
-        bool isRunning = PlayerController.IsRunning;
-
-        if (isRunning && !_isTired && !_isBuffed)
-        {
-            // スタミナを消費
-            _currentStamina -= _runCostPerSecond * Time.deltaTime;
-            _currentStamina = Mathf.Max(_currentStamina, 0);
-
-            // スタミナが0になったら疲労状態(走行不能)にする
-            if (_currentStamina == 0) _isTired = true;
-        }
         else
         {
-            // スタミナを回復
-            _currentStamina += _recoverRatePerSecond * Time.deltaTime;
-            _currentStamina = Mathf.Min(_currentStamina, _maxStamina);
+            bool isRunning = PlayerController.IsRunning;
 
-            // スタミナが最大値に戻ったら疲労状態を解除
-            if (_currentStamina == _maxStamina) _isTired = false;
+            if (isRunning && !_isTired)
+            {
+                // スタミナを消費
+                _currentStamina -= _runCostPerSecond * Time.deltaTime;
+                _currentStamina = Mathf.Max(_currentStamina, 0);
+
+                // スタミナが0になったら疲労状態(走行不能)にする
+                if (_currentStamina == 0) _isTired = true;
+            }
+            else
+            {
+                // スタミナを回復
+                _currentStamina += _recoverRatePerSecond * Time.deltaTime;
+                _currentStamina = Mathf.Min(_currentStamina, _maxStamina);
+
+                // スタミナが最大値に戻ったら疲労状態を解除
+                if (_currentStamina == _maxStamina) _isTired = false;
+            }
+
         }
-
-        // 消費／回復 を反映
         UpdateStaminaUI();
     }
 
@@ -110,7 +112,8 @@ public class StaminaSystem : MonoBehaviour
     // 状態に合わせて表示するスタミナ量・ゲージを選択
     private void UpdateStaminaUI()
     {
-        float fillAmount = _currentStamina / _maxStamina;
+        // ポーション効果中はカウントダウンに伴いゲージが減っていく
+        float fillAmount = _isBuffed ? (_remainingTime / _effectiveTime) : (_currentStamina / _maxStamina);
 
         if (_isBuffed)
         {
