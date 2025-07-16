@@ -3,11 +3,11 @@ using UnityEngine;
 /// <summary>Playerの発見状態ごとで徘徊／追跡を振り分ける</summary>
 public class TaggerController : MonoBehaviour
 {
-    public TaggerVision TaggerVisionScript;
+    public TaggerVision TaggerVision;
     public AudioClip FindSE;
 
-    private WanderingField _wanderingFieldScript;
-    private ChasingPlayer _chasingPlayerScript;
+    private WanderField _wanderField;
+    private ChasePlayer _chasePlayer;
     private Transform _targetTransform;
     private Animator _animator;
     private AudioSource _audioSource;
@@ -16,8 +16,8 @@ public class TaggerController : MonoBehaviour
 
     void Awake()
     {
-        _wanderingFieldScript = GetComponent<WanderingField>();
-        _chasingPlayerScript = GetComponent<ChasingPlayer>();
+        _wanderField = GetComponent<WanderField>();
+        _chasePlayer = GetComponent<ChasePlayer>();
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
     }
@@ -32,7 +32,7 @@ public class TaggerController : MonoBehaviour
 
     void Update()
     {
-        _targetTransform = TaggerVisionScript.Target;
+        _targetTransform = TaggerVision.Target;
 
         // 発見時には、Find→Chaseの流れ
         if (_targetTransform != null)
@@ -42,7 +42,7 @@ public class TaggerController : MonoBehaviour
             _playedFindSE = true;
 
             // 徘徊の移動を無効化するため
-            _wanderingFieldScript.enabled = false;
+            _wanderField.enabled = false;
 
             // Findアニメーション終了後、自動でChaseアニメーションへ
             _animator.SetBool("isFinding", true);
@@ -73,17 +73,17 @@ public class TaggerController : MonoBehaviour
     private void SetStateWandering()
     {
         // スピードを徘徊状態に合わせるため、徘徊用スクリプトのみ有効化
-        if (!_wanderingFieldScript.enabled) _wanderingFieldScript.enabled = true;
-        if (_chasingPlayerScript.enabled) _chasingPlayerScript.enabled = false;
+        if (!_wanderField.enabled) _wanderField.enabled = true;
+        if (_chasePlayer.enabled) _chasePlayer.enabled = false;
     }
 
     // 追跡(Chaseアニメーション開始時に実行)
     private void SetStateChasing()
     {
-        if (!_chasingPlayerScript.enabled)
+        if (!_chasePlayer.enabled)
         {
-            _chasingPlayerScript.enabled = true;
-            _chasingPlayerScript.SetTarget(_targetTransform);
+            _chasePlayer.enabled = true;
+            _chasePlayer.SetTarget(_targetTransform);
         }
     }
 }
