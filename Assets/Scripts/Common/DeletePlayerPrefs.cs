@@ -5,7 +5,8 @@ public class DeletePlayerPrefs : MonoBehaviour
 {
     void OnApplicationQuit()
     {
-        PlayerPrefs.DeleteAll(); 
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
+        Debug.Log("PlayerPrefs cleared on application quit.");
     }
 }
