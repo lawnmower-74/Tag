@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = true;
 
         // スタミナゲージを非表示
-        StaminaSystem.gameObject.SetActive(false);
+        if (StaminaSystem != null) StaminaSystem.gameObject.SetActive(false);
     }
 
     // Playerの移動操作

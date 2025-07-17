@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>鬼の徘徊行動を制御</summary>
-public class WanderingField : MonoBehaviour
+public class WanderField : MonoBehaviour
 {
     public float WanderSpeed = 3.0f;
     public float WanderRadius = 100.0f;
