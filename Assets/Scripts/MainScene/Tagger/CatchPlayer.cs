@@ -23,6 +23,7 @@ public class CatchPlayer : MonoBehaviour
             // 消滅時SE
             _audioSource.PlayOneShot(DestroySE);
 
+            // Playerを消滅
             Destroy(other.gameObject);
         }
     }
