@@ -16,7 +16,7 @@
 
 # 推奨環境(テスト環境)
 - Mac
-  - CPU：`2GHz クアッドコア Intel Core i5`
+  - プロセッサ：`2GHz クアッドコア Intel Core i5`
   - メモリ：`16GB`
   - グラフィックス：`Intel Iris Plus Graphics 1536MB`
 - Windows
