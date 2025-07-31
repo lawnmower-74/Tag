@@ -1,6 +1,6 @@
-<center>
+<p align="center">
     <img src="src/img/Title.png" alt="ゲームタイトル" width="600" height="220">
-</center>
+</p>
 
 
 # 概要
@@ -26,39 +26,39 @@
 ## プレイヤーの移動
 - **歩行**
     - WASD もしくは 上下左右キー
-    <center>
+    <p align="center">
         <img src="src/mov/DemoWalking.gif" width="500" height="300">
-    </center>
+    </p>
 
 - **走行**
     - 上記 + Shift
     - 緑の人型ゲージはスタミナゲージ（[※詳細は以下](#スタミナ)）
-    <center>
+    <p align="center">
         <img src="src/mov/DemoRunning.gif" width="500" height="300">
-    </center>
+    </p>
 
 ## カメラ操作
 - マウスで視点を操作できます（水平方向のみ）
-    <center>
+    <p align="center">
         <img src="src/mov/DemoCursor.gif" width="500" height="300">
-    </center>
+    </p>
 
 
 # ゲームシステム
 ## プレイ時間設定
 - タイトル画面からスタートするときにプレイヤー自身で設定可能  
 - 長ければ長いほど出現する鬼の数が増えるので、難易度はその分増します  
-    <center>
+    <p align="center">
         <img src="src/img/PlayTime.png" width="500" height="300">
-    </center>
+    </p>
 
 ## 鬼
 - 一定時間が経過すると、フィールドのランダムな箇所に出現（Maxで15体出現）
 - 基本的にフィールドを徘徊しているが、プレイヤーを発見すると見失うまで追跡
 - 鬼はスタミナのないバケモノなので、アイテム（ポーション）を有効活用しなければ逃げ切ることが難しくなります
-    <center>
+    <p align="center">
         <img src="src/mov/Tagger.gif" width="500" height="300">
-    </center>
+    </p>
 
 ## スタミナ
 プレイヤーは人間のため走ると疲れます
@@ -66,27 +66,27 @@
     - スタミナがある通常状態。この間、プレイヤーは走ることができる
 - 赤ゲージ
     - スタミナがない疲労状態。この間、プレイヤーは走ることができない（ゲージは徐々に回復）
-    <center>
+    <p align="center">
         <img src="src/mov/StaminaSystem.gif" width="500" height="300">
-    </center>
+    </p>
 
 ## ポーション
 スタミナの縛りがあるプレイヤーを助けてくれる強力なアイテム
 - 一定時間が経過すると、フィールドのランダムな箇所に出現
 - 取得時から1分間、走り続けても疲労状態にならない
 - この間ゲージは、その1分間のタイマーとして機能します
-    <center>
+    <p align="center">
         <img src="src/mov/PotionSystem.gif" width="500" height="300">
-    </center>
+    </p>
 
 ## ミニマップ
 フィールドの形状と各要素の位置を確認可能  
 - プレイヤー：青アイコン
 - 鬼：赤アイコン
 - ポーション：緑アイコン
-    <center>
-        <img src="src/img/MiniMap.png" width="200" height="200">
-    </center>
+    <p align="center">
+        <img src="src/img/MiniMap.png" width="300" height="300">
+    </p>
 
 
 # 使用技術
