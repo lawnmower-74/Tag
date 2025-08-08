@@ -13,12 +13,11 @@
 https://youtu.be/jbfkwxkh8Ic
 
 
-# 推奨環境(テスト環境)
+# テスト環境
 - Mac
   - プロセッサ：`2GHz クアッドコア Intel Core i5`
   - メモリ：`16GB`
   - グラフィックス：`Intel Iris Plus Graphics 1536MB`
-- Windows
 
 
 # 基本操作
