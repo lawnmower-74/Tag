@@ -18,7 +18,10 @@ https://youtu.be/jbfkwxkh8Ic
   - プロセッサ：`2GHz クアッドコア Intel Core i5`
   - メモリ：`16GB`
   - グラフィックス：`Intel Iris Plus Graphics 1536MB`
-
+- Windows（最低）
+  - プロセッサ：`Intel Core i5-8250U`
+  - メモリ：`8GB`
+  - グラフィックス：`Intel UHD Graphics 620`
 
 # 基本操作
 ## プレイヤーの移動
